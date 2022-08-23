@@ -50,3 +50,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+#gdb
+peda-session-test.txt
+.gdb_history
