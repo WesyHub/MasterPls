@@ -54,9 +54,11 @@ pokemon *Read_csv(void){
 
 
     if(ini !=0){
+            
             pokeadd(new_pokemon, new_pokemon->nom, new_pokemon->type, new_pokemon->level, new_pokemon->nbown, new_pokemon->discover, new_pokemon->capture);
         }   
     else{
+                   
             pokemon* salameche_entry = malloc(sizeof(pokemon));
             salameche_entry->nom = "Salameche";
             salameche_entry->type = "Feu";
@@ -68,7 +70,6 @@ pokemon *Read_csv(void){
             printf("\n");
             printf("Vous avez choisi %s ! \n", salameche_entry->nom);
             tmp_starter = salameche_entry;
-            tmp_starter->next = NULL;
             
             ini =1;
         }
@@ -81,7 +82,7 @@ pokemon *Read_csv(void){
     
 
     while (getline(&ligne, &cpt, myfile)!= -1){
-        
+
         char *token;
         pokemon *new_node = malloc(sizeof(pokemon));
 
@@ -116,7 +117,6 @@ pokemon *Read_csv(void){
         
         tmp_pokemon = new_node;
         
-        
         if (new_pokemon == NULL)
         {
             new_pokemon = tmp_pokemon ;
@@ -131,6 +131,10 @@ pokemon *Read_csv(void){
 		ligne = NULL;
 		cpt = 0;
         
+    }
+    if (tmp_pokemon == NULL)
+    {
+        new_pokemon = tmp_starter;
     }
     
     fclose(myfile);
