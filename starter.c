@@ -37,7 +37,7 @@ pokemon *Read_csv(void){
     FILE *myfile = fopen("pokedex.csv", "r");
     
     pokemon *new_pokemon = NULL;
-    
+    pokemon *tmp_starter = NULL;
     pokemon *tmp_pokemon = NULL;
     
     char *ligne = NULL;
@@ -67,8 +67,9 @@ pokemon *Read_csv(void){
             salameche_entry->next = NULL;
             printf("\n");
             printf("Vous avez choisi %s ! \n", salameche_entry->nom);
-            new_pokemon = salameche_entry;
-            new_pokemon->next = NULL;
+            tmp_starter = salameche_entry;
+            tmp_starter->next = NULL;
+            
             ini =1;
         }
     
@@ -106,7 +107,7 @@ pokemon *Read_csv(void){
         strcpy(new_node->capture,token);
         
         
-        new_node->next = NULL;
+        new_node->next = tmp_starter;
 
         if (tmp_pokemon != NULL)
         {
@@ -114,16 +115,17 @@ pokemon *Read_csv(void){
         }
         
         tmp_pokemon = new_node;
-
+        
+        
         if (new_pokemon == NULL)
         {
             new_pokemon = tmp_pokemon ;
         }
-        else
-        {
-            new_pokemon->next = tmp_pokemon;
+        // else
+        // {
             
-        }
+        //     new_pokemon->next = tmp_pokemon;
+        // }
         
         free(ligne);
 		ligne = NULL;
