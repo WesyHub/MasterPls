@@ -30,6 +30,63 @@ pokemon *init(char *nom, char *type, int level, int nbown, char * discover, char
 
     return PTR_Controller;
 }
+pokemon *bulbizarre(void){
+
+	char* current_time = get_date();
+
+	pokemon* bulbizarre_entry = malloc(sizeof(pokemon));
+	bulbizarre_entry->nom = "Bulbizarre";
+	bulbizarre_entry->type = "Plante";
+	bulbizarre_entry->level = 5;
+	bulbizarre_entry->nbown = 1;
+	bulbizarre_entry->discover = current_time;
+	bulbizarre_entry->capture = current_time;
+	bulbizarre_entry->next = NULL;
+
+	printf("\n");
+	printf("Vous avez choisi %s ! \n", bulbizarre_entry->nom); 
+
+	return bulbizarre_entry ;
+}
+pokemon *carapuce(void){
+
+	char* current_time = get_date();
+
+	pokemon* carapuce_entry = malloc(sizeof(pokemon));
+	carapuce_entry->nom = "Carapuce";
+	carapuce_entry->type = "Eau";
+	carapuce_entry->level = 5;
+	carapuce_entry->nbown= 1;
+	carapuce_entry->discover = current_time;
+	carapuce_entry->capture = current_time;
+	carapuce_entry->next = NULL;
+
+	printf("\n");
+	printf("Vous avez choisi %s ! \n", carapuce_entry->nom); 
+
+	return carapuce_entry;
+
+}
+
+pokemon *salameche(void){
+
+	char* current_time = get_date();
+
+	pokemon* salameche_entry = malloc(sizeof(pokemon));
+	salameche_entry->nom = "Salameche";
+	salameche_entry->type = "Feu";
+	salameche_entry->level = 5;
+	salameche_entry->nbown = 1;
+	salameche_entry->discover = current_time ;
+	salameche_entry->capture = current_time ;
+	salameche_entry->next = NULL;
+
+	printf("\n");
+	printf("Vous avez choisi %s ! \n", salameche_entry->nom);  
+
+	return salameche_entry;
+
+}
 
 pokemon *Read_csv(void){
 
@@ -48,7 +105,7 @@ pokemon *Read_csv(void){
 	ligne = NULL;
 	cpt = 0;
     int ini = 0;
-    char* current_time = get_date();
+    // char* current_time = get_date();
 	 
 
 
@@ -58,18 +115,41 @@ pokemon *Read_csv(void){
             pokeadd(new_pokemon, new_pokemon->nom, new_pokemon->type, new_pokemon->level, new_pokemon->nbown, new_pokemon->discover, new_pokemon->capture);
         }   
     else{
-                   
-            pokemon* salameche_entry = malloc(sizeof(pokemon));
-            salameche_entry->nom = "Salameche";
-            salameche_entry->type = "Feu";
-            salameche_entry->level = 5;
-            salameche_entry->nbown = 1;
-            salameche_entry->discover = current_time ;
-            salameche_entry->capture = current_time ;
-            salameche_entry->next = NULL;
+
+
+            // pokemon* salameche_entry = malloc(sizeof(pokemon));
+            // salameche_entry->nom = "Salameche";
+            // salameche_entry->type = "Feu";
+            // salameche_entry->level = 5;
+            // salameche_entry->nbown = 1;
+            // salameche_entry->discover = current_time ;
+            // salameche_entry->capture = current_time ;
+            // salameche_entry->next = NULL;
+            // printf("\n");
+            // printf("Vous avez choisi %s ! \n", salameche_entry->nom);
+            // tmp_starter = salameche_entry;
+            int i = 0;
+
             printf("\n");
-            printf("Vous avez choisi %s ! \n", salameche_entry->nom);
-            tmp_starter = salameche_entry;
+            printf("#---Bienvenue jeune dresseur !---#\nAvant de commencer l'aventure tu dois choisir ton premier Pokemon !\n");
+            printf("Tu dois choisir parmis ces 3 pokemon\n");
+            printf("\n");
+            printf("Bulbizarre : 0\n");
+            printf("Carapuce : 1\n");
+            printf("Salameche : 2\n");
+            printf("\n");
+            printf("Quel est ton choix : ");
+
+            scanf("%d", &i);
+
+            pokemon *(*array_fptr[3])(void);
+            array_fptr[0] = &bulbizarre;
+            array_fptr[1] = &carapuce;
+            array_fptr[2] = &salameche;
+
+            pokemon *L = array_fptr[i]();
+
+            tmp_starter = L;
             
             ini =1;
         }
