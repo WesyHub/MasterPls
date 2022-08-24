@@ -12,4 +12,5 @@ pokemon *bulbizarre(void);
 void print_menu(pokemon* L);
 pokemon *start_menu(void);
 void save(pokemon *L);
+void quit(pokemon *L);
 #endif /*  __STARTER__ */

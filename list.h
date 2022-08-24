@@ -20,5 +20,5 @@ int get_lenght(pokemon * L);
 int get_index(pokemon *L, int lenght, char * pokemon_search);
 void update_element(pokemon *L, int index , int old_value, int new_value, char* capture);
 int exist_pokemon(pokemon *L, char *nom);
-void save(pokemon *L);
+void print_specific_pokemon(pokemon *L);
 #endif /*__LINKED_LIST__ */

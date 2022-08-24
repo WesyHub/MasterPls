@@ -388,10 +388,12 @@ void pokedex_menu(pokemon *L){
 
         if( i <= 4){
 
-            void (*array_fptr[2])(pokemon *L);
+            void (*array_fptr[5])(pokemon *L);
             array_fptr[0] = &adding_pokemon;
-            array_fptr[1] = &printList;
-            array_fptr[2] = &save;
+            array_fptr[1] = &print_specific_pokemon;
+            array_fptr[2] = &printList;
+            array_fptr[3] = &save;
+            array_fptr[4] = &quit;
             array_fptr[i](L);
         }
         else {
@@ -436,6 +438,25 @@ void save(pokemon *L){
 
 	fclose(file);
 }
+void quit(pokemon *L){
 
+	int i = 0; 
+
+	printf("Quitter sans sauvegarder : 0\n");
+	printf("Quitter et sauvegarder : 1 \n");
+
+	scanf("%d",&i);
+
+	if(i == 0){
+
+		exit(0);
+	}
+
+	else if( i == 1){
+
+		save(L);
+		exit(0);
+	}
+}
 
 

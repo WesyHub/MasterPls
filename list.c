@@ -158,3 +158,94 @@ int exist_pokemon(pokemon *L, char *nom){
 }
 
 /*----------------------------------------------------------------------*/
+
+void print_specific_pokemon(pokemon *L){
+
+	char pokemon_search [15];
+
+	int i = 0;
+
+	printf("Par nom : 0 \n");
+	printf("Attrapé : 1\n");
+	printf("Apercu : 2\n");
+	printf("Retour : 3\n");
+
+	scanf("%d",&i);
+
+	if(i == 0){
+
+		printf("Saisissez le nom du pokemon : ");
+		scanf("%s",pokemon_search);
+		printf("#----%s-----#\n",pokemon_search);
+
+		while(L != NULL){
+
+		char* pokemon_pokedex = L->nom;
+
+		printf("#----%s-----#\n",pokemon_pokedex);
+			
+		if(strcmp(pokemon_search, pokemon_pokedex) == 0){
+
+			printf("\n");
+			printf("#---Information sur le Pokemon---#\n");
+			printf("\n");
+			printf("Nom du Pokemon : %s\n",L->nom);
+			printf("Type du Pokemon : %s\n",L->type);
+			printf("Niveau du pokemon : %d\n",L->level);
+			printf("Date de decouverte du pokemon : %s\n",L->discover);
+			printf("Date de capture du pokemon : %s\n", L->capture);
+			printf("Nombre de fois capturé : %d\n",L->nbown);		
+		}
+			
+		L = L->next;
+
+		}
+	}
+
+	else if(i == 1){
+
+		int statue = 1 ;
+
+		while(L != NULL){
+
+			int possede = L->nbown;
+
+			if(possede >= statue){
+
+				printf("\n");
+				printf("#---Information sur le Pokemon---#\n");
+				printf("\n");
+				printf("Nom du Pokemon : %s\n",L->nom);
+				printf("Type du Pokemon : %s\n",L->type);
+				printf("Niveau du pokemon : %d\n",L->level);
+				printf("Date de decouverte du pokemon : %s\n",L->discover);
+				printf("Date de capture du pokemon : %s\n", L->capture);
+				printf("Nombre de fois capturé : %d\n",L->nbown);
+			}
+
+		L = L->next;
+
+		}
+	}
+
+	else if(i == 2){
+
+		int statue = 0 ;
+
+		while(L != NULL){
+
+			int possede = L->nbown;
+
+			if(statue == possede){
+
+				printf("Nom du Pokemon : %s\n",L->nom);
+				printf("Type du Pokemon : %s\n",L->type);
+				printf("Niveau du pokemon : %d\n",L->level);
+				
+			}
+
+		L = L->next;
+
+		}
+	}	
+}
