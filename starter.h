@@ -9,5 +9,7 @@ pokemon *init(char *nom, char *type,int level, int nbown, char * discover, char 
 pokemon *salameche(void);
 pokemon *carapuce(void);
 pokemon *bulbizarre(void);
+void print_menu(pokemon* L);
+pokemon *start_menu(void);
 
 #endif /*  __STARTER__ */

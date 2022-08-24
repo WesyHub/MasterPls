@@ -7,7 +7,6 @@
 int main(void){
 
     pokemon *newpokemon = Read_csv();
-
     pokedex_menu(newpokemon);
     return 0;
 }
