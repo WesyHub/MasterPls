@@ -88,7 +88,7 @@ pokemon *salameche(void){
 
 	printf("\n");
 	printf("Vous avez choisi %s ! \n", salameche_entry->nom);  
-    pokedex = salameche_entry;
+    
     
     return salameche_entry;
 
@@ -210,7 +210,9 @@ pokemon *Read_csv(void){
 
             pokemon *L = array_fptr[i]();
 
+            
             tmp_starter = L;
+            
             
             
             ini =1;
@@ -232,7 +234,7 @@ pokemon *Read_csv(void){
         pokemon *new_node = malloc(sizeof(pokemon));
 
         ligne[strlen(ligne) - 1] = 0;
-
+        
         token = strtok(ligne, ";");
         new_node->nom = malloc(sizeof(token)+1);
         strcpy(new_node->nom,token);
@@ -245,16 +247,15 @@ pokemon *Read_csv(void){
         new_node->nbown = atoi(strtok(NULL, ";"));
 
         token = strtok(NULL, ";");
-        new_node->discover = malloc(sizeof(token)+1);
+        new_node->discover = malloc(sizeof(token)+25);
         strcpy(new_node->discover,token);
 
         token = strtok(NULL, ";");
-        new_node->capture = malloc(sizeof(token)+1);
+        new_node->capture = malloc(sizeof(token)+25);
         strcpy(new_node->capture,token);
         
         
         new_node->next = tmp_starter;
-
         if (tmp_pokemon != NULL)
         {
             tmp_pokemon->next = new_node;
@@ -266,6 +267,7 @@ pokemon *Read_csv(void){
         {
             new_pokemon = tmp_pokemon ;
         }
+        
         // else
         // {
             
@@ -277,9 +279,11 @@ pokemon *Read_csv(void){
 		cpt = 0;
         
     }
+    
     if (tmp_pokemon == NULL)
-    {
+    { 
         new_pokemon = tmp_starter;
+        
     }
     
     
