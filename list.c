@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "starter.h"
 
 
 extern pokemon *pokedex;
@@ -68,5 +69,92 @@ void pokeadd(pokemon *L, char *nom, char *type, int level, int nbown, char *disc
     
     return;
 }
+int get_lenght(pokemon * L){
+
+	int count;
+
+	while(L != NULL){
+
+		L = L->next;
+		count ++ ; 
+	} 
+
+	return count - 1;
+}
+
+int get_index(pokemon *L, int lenght, char * pokemon_search){
+
+	int index = 0; 
+
+	for(int i = 0; i < lenght && L != NULL; i++){
+
+		char * pokemon_pokedex = L->nom;
+
+		if(strcmp(pokemon_pokedex,pokemon_search) == 0 ){
+
+				index = i;
+						
+		}
+		
+		
+		L= L->next;
+	}
 
 
+	return index;
+}
+
+void update_element(pokemon *L, int index , int old_value, int new_value, char* capture){
+	
+
+	pokemon *head = L;
+	pokemon *current = NULL;
+
+	int position = 0; 
+
+	if(head == NULL){
+
+		return;
+	}
+
+	current = head;
+
+	for(int i = 0; index; i++){	
+
+		if(current->nbown == old_value){
+
+			current->nbown = new_value;
+			current->capture = capture;
+			
+			return;
+		}
+
+		current = current->next;
+		position ++ ;
+	} 
+
+	pokedex_menu(L);
+}
+
+/*----------------------------------------------------------------------*/
+
+int exist_pokemon(pokemon *L, char *nom){
+
+	while(L != NULL){
+
+		char* pokemon_pokedex = L->nom;
+
+		printf("#----%s-----#\n",pokemon_pokedex);
+			
+		if(strcmp(nom, pokemon_pokedex) == 0){
+
+			return(1);		
+		}
+		
+		L = L->next;		
+	}
+
+	return(0);
+}
+
+/*----------------------------------------------------------------------*/

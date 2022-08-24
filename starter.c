@@ -293,21 +293,80 @@ pokemon *Read_csv(void){
 
 void adding_pokemon(pokemon *L)
 {
+    int i = 0;
     char nom[25];
     char type[25];
     int level = 2;
+    int nbown = 0;
     char *current_time = get_date();
+    char capture [15] = "Pas capturé";
 
+    int nb_index = get_lenght(L);
 
-    printf("Nom : \n");
-    scanf("%s", nom);
-    printf("Type : \n");
-    scanf("%s", type);
-    printf("Level : \n");
-    scanf("%d", &level);
+	printf("\n");
+	printf("#---Vous avez trouvé un nouveau pokemon ajouté le à votre pokedex !---#\n");
+	printf("\n");
+	printf("Souhaitez vous l'attrapper ?\n");
+	printf("Oui : 0\n");
+	printf("Non : 1\n");
 
+	scanf("%d",&i);
 
-    pokeadd(L, nom, type, level, 1, current_time, current_time);
+	printf("Saisissez son nom : \n");
+	scanf("%s", nom);
+
+	printf("Saisissez son type : \n");
+	scanf("%s", type);
+
+	printf("Niveau du pokemon : \n");
+	scanf("%d", &level);
+
+	int exist = exist_pokemon(L,nom);
+
+    if(i == 0){
+
+		if(exist == 1 ){
+
+			printf("le pokemon %s\n exist",nom);
+
+			int index_pokemon = get_index(L,nb_index, nom);
+
+			while(L != NULL){
+
+				char* pokemon_pokedex = L->nom;
+				
+				if(strcmp(nom, pokemon_pokedex) == 0){
+
+					nbown = L->nbown + 1;
+					update_element(L,index_pokemon ,L->nbown,nbown,current_time);
+						
+				}
+				
+			L = L->next;
+
+			}
+		}
+
+		else{	
+
+            nbown = 1 ;
+            pokeadd(L, nom, type, level, nbown, current_time, current_time);
+		}	
+	}
+
+	else if( i == 1){
+
+		nbown = 0 ;
+        pokeadd(L, nom, type, level, nbown, current_time, capture);
+	}
+
+	else{
+
+		printf("Mauvaise saisie \n");
+		adding_pokemon(L);
+	}
+
+    
     
 }
 
@@ -332,6 +391,7 @@ void pokedex_menu(pokemon *L){
             void (*array_fptr[2])(pokemon *L);
             array_fptr[0] = &adding_pokemon;
             array_fptr[1] = &printList;
+            array_fptr[2] = &save;
             array_fptr[i](L);
         }
         else {
@@ -352,6 +412,29 @@ char* get_date(void){
 
     return time_str;
 
+}
+
+void save(pokemon *L){
+
+	pokemon *tmp = L;
+
+	FILE* file = fopen("pokedex.csv", "w");
+	
+	if(file == NULL){
+
+		fprintf(stderr, "Erreur dans l'ouverture du fichier de sauvegarde\n");
+	}
+
+	fprintf(file,"nom;type;level;nbown;discover;capture\n");
+
+	while(tmp != NULL){
+
+		fprintf(file, "%s;%s;%d;%d;%s;%s\n", tmp->nom, tmp->type,tmp->level, tmp->nbown, tmp->discover, tmp->capture);
+		tmp = tmp->next;
+	
+	}
+
+	fclose(file);
 }
 
 

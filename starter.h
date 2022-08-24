@@ -11,5 +11,5 @@ pokemon *carapuce(void);
 pokemon *bulbizarre(void);
 void print_menu(pokemon* L);
 pokemon *start_menu(void);
-
+void save(pokemon *L);
 #endif /*  __STARTER__ */
