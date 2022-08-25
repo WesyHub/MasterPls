@@ -249,3 +249,42 @@ void print_specific_pokemon(pokemon *L){
 		}
 	}	
 }
+
+void delete_pokemon_node(pokemon *L, int index){
+
+
+	pokemon *prev, *tmp;
+    int i;
+
+    if(L == NULL || index < 0){ 
+    	return ;
+    }
+
+    if(index == 0){
+
+    	printf("index : %d", index);
+        tmp = L->next;
+        free(L);
+        L = NULL;
+	} 
+
+    else {
+
+        prev = L;
+        tmp = L->next;
+
+        for(i=1;i<index;++i){
+            
+            prev = tmp;
+            tmp = tmp->next;
+            
+            if(tmp == NULL){
+            	return ;
+            }
+        }
+
+        prev->next = tmp->next;
+        free(tmp);
+        tmp = NULL;
+    }
+}

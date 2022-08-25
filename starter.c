@@ -380,20 +380,22 @@ void pokedex_menu(pokemon *L){
 		printf("\n");
 		printf("Ajouter un pokemon : 0\n");
 		printf("Afficher le pokedex : 1\n");
-		printf("Supprimer un pokemon : 2\n");
-		printf("sauvegarder les pokemons : 3\n");
-		printf("Quitter le programme : 4\n");
+        printf("Afficher un pokémon spécifique : 2\n");
+		printf("Supprimer un pokemon : 3\n");
+		printf("sauvegarder les pokemons : 4\n");
+		printf("Quitter le programme : 5\n");
 
         scanf("%d", &i);
 
-        if( i <= 4){
+        if( i <= 5){
 
-            void (*array_fptr[5])(pokemon *L);
+            void (*array_fptr[6])(pokemon *L);
             array_fptr[0] = &adding_pokemon;
-            array_fptr[1] = &print_specific_pokemon;
-            array_fptr[2] = &printList;
-            array_fptr[3] = &save;
-            array_fptr[4] = &quit;
+            array_fptr[1] = &printList;
+            array_fptr[2] = &print_specific_pokemon;
+            array_fptr[3] = &delete_pokemon;
+            array_fptr[4] = &save;
+            array_fptr[5] = &quit;
             array_fptr[i](L);
         }
         else {
@@ -456,6 +458,71 @@ void quit(pokemon *L){
 
 		save(L);
 		exit(0);
+	}
+}
+void delete_pokemon(pokemon *L){
+
+	char pokemon_search [15];
+	char capture [7] = "none";
+	int nb_suppression; 
+	pokemon *list = L;
+
+	int nb_index = get_lenght(L);
+	printf("Taille de la liste %d\n", nb_index);
+	
+	printf("Saisissez le nom du pokemon a suprimer : \n");
+	scanf("%s", pokemon_search);
+
+	int index_pokemon = get_index(L,nb_index, pokemon_search);
+	printf("index pokemon: %d\n", index_pokemon);
+
+
+	while(L != NULL){
+
+		char* pokemon_pokedex = L->nom;
+
+			
+		if(strcmp(pokemon_search, pokemon_pokedex) == 0){
+
+			int statue = L->nbown;
+
+			if(statue == 0 ){
+
+				printf("Le pokemon %s est oublié ! ", pokemon_search);
+				delete_pokemon_node(list,index_pokemon);
+				
+
+				
+			}	
+
+			else if (statue == 1 ){
+
+				printf("Le pokemon %s que vous posséder en 1 exemplaire sera oublié !",pokemon_search);
+				delete_pokemon_node(list,index_pokemon);	
+				
+			}
+
+			else{
+
+				printf("Vous possédez ce pokemon en plusieurs exemplaire : %d",statue);
+				printf("Saisissez le nombre de pokemon a supprimer\n");
+				scanf("%d",&nb_suppression);
+
+				if(nb_suppression >= statue){
+
+					printf("Le pokemon %s sera oublié",pokemon_search);
+					delete_pokemon_node(list,index_pokemon);
+				}
+				else{
+
+					int nb_pokemon = L->nbown - nb_suppression; 	
+					printf("update du nombre de pokemon ");
+					update_element(L,index_pokemon ,L->nbown,nb_pokemon,capture);
+				}
+			}	
+		}
+			
+		L = L->next;
 	}
 }
 

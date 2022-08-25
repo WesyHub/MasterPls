@@ -13,4 +13,5 @@ void print_menu(pokemon* L);
 pokemon *start_menu(void);
 void save(pokemon *L);
 void quit(pokemon *L);
+void delete_pokemon(pokemon *L);
 #endif /*  __STARTER__ */

@@ -21,4 +21,5 @@ int get_index(pokemon *L, int lenght, char * pokemon_search);
 void update_element(pokemon *L, int index , int old_value, int new_value, char* capture);
 int exist_pokemon(pokemon *L, char *nom);
 void print_specific_pokemon(pokemon *L);
+void delete_pokemon_node(pokemon *L, int index);
 #endif /*__LINKED_LIST__ */
