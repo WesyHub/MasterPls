@@ -164,16 +164,17 @@ pokemon *Read_csv(void){
 	free(ligne);
 	ligne = NULL;
 	cpt = 0;
-    int ini = 0;
+    char * ini = verif();
     
     // char* current_time = get_date();
 	 
 
 
 
-    if(ini !=0){
+    if(ini != NULL ){
             
-            pokeadd(new_pokemon, new_pokemon->nom, new_pokemon->type, new_pokemon->level, new_pokemon->nbown, new_pokemon->discover, new_pokemon->capture);
+            // pokeadd(new_pokemon, new_pokemon->nom, new_pokemon->type, new_pokemon->level, new_pokemon->nbown, new_pokemon->discover, new_pokemon->capture);
+			printf("Bon retour !");
         }   
     else{
 
@@ -215,7 +216,7 @@ pokemon *Read_csv(void){
             
             
             
-            ini =1;
+            // ini =1;
         
 
             
@@ -527,3 +528,32 @@ void delete_pokemon(pokemon *L){
 }
 
 
+char *verif(void){
+
+	FILE *myfile = fopen("pokedex.csv", "r");
+
+	char *ligne = NULL;
+	size_t cpt = 0;
+
+	getline(&ligne, &cpt, myfile);
+	free(ligne);
+	ligne = NULL;
+	cpt = 0;
+	char *tmp = NULL;
+	while(getline(&ligne, &cpt, myfile)!= -1){
+		
+		
+	
+		ligne[strlen(ligne) - 1] = 0;
+		tmp = strtok(ligne, ";");
+		if (tmp != NULL)
+		{
+			return tmp;
+		}
+		free(ligne);
+		ligne = NULL;
+		cpt = 0;
+	}
+	fclose(myfile);
+	return tmp;
+}
