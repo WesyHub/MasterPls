@@ -2,6 +2,8 @@
     "files.associations": {
         "typeinfo": "c",
         "stdlib.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "starter.h": "c",
+        "signal.h": "c"
     }
 }
