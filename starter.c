@@ -289,6 +289,7 @@ pokemon *Read_csv(void){
     
     
     fclose(myfile);
+	pokedex = new_pokemon;
     return new_pokemon;
 }
 
