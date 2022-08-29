@@ -300,8 +300,8 @@ void adding_pokemon(pokemon *L)
     int level = 2;
     int nbown = 0;
     char *current_time = get_date();
-    char capture [15] = "Pas capturé";
-
+    
+	
     int nb_index = get_lenght(L);
 
 	printf("\n");
@@ -358,7 +358,7 @@ void adding_pokemon(pokemon *L)
 	else if( i == 1){
 
 		nbown = 0 ;
-        pokeadd(L, nom, type, level, nbown, current_time, capture);
+        pokeadd(L, nom, type, level, nbown, current_time, "Non capturé");
 	}
 
 	else{
